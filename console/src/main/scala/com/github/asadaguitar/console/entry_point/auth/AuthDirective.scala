@@ -14,11 +14,11 @@ trait AuthDirective extends UserInfoMarshaller {
     override lazy val jwtConfig: JwtConfig = new JwtConfig(config)
   }
 
-  protected def generateJwtToken(userId: UserId): JwtToken = JwtToken(
-    jwtAuth.generateToken(userId)
+  protected def generateJwtToken(authProfile: AuthProfile): JwtToken = JwtToken(
+    jwtAuth.generateToken(authProfile)
   )
 
-  protected def authenticate: Directive1[UserId] =
-    jwtAuth.jwtAuthenticate(jwtAuth.as[UserId])
+  protected def authenticate: Directive1[AuthProfile] =
+    jwtAuth.jwtAuthenticate(jwtAuth.as[AuthProfile])
 
 }

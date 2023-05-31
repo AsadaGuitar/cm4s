@@ -1,3 +1,5 @@
 package com.github.asadaguitar.console.payload.db.field.user
 
-case class HashedUserPassword(value: String) extends AnyVal
+import com.github.asadaguitar.console.util.security.types.HashedValue
+
+case class HashedUserPassword(value: HashedValue) extends AnyVal

@@ -1,21 +1,23 @@
 package com.github.asadaguitar.console.entry_point.marshaller
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import com.github.asadaguitar.console.entry_point.model.user.{CreateNewUserRequest, CreateNewUserRequestForm}
-import com.github.asadaguitar.console.payload.db.field.user.{UserEmailAddress, UserId, UserName, UserPassword}
+import com.github.asadaguitar.console.entry_point.auth.AuthProfile
+import com.github.asadaguitar.console.entry_point.model.user.CreateNewUserRequestForm
+import com.github.asadaguitar.console.payload.db.field.client.ClientId
+import com.github.asadaguitar.console.payload.db.field.user.UserId
 import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 
 trait UserInfoMarshaller extends DefaultJsonProtocol with SprayJsonSupport {
 
-  implicit val userIdMarshaller: RootJsonFormat[UserId] = jsonFormat1(UserId)
-  implicit val userNameMarshaller: RootJsonFormat[UserName] = jsonFormat1(
-    UserName
+  implicit val userIdMarshaller: RootJsonFormat[UserId] = jsonFormat1(UserId.apply)
+
+  implicit val clientIdMarshaller: RootJsonFormat[ClientId] = jsonFormat1(ClientId.apply)
+
+  implicit val authProfileMarshaller: RootJsonFormat[AuthProfile] = jsonFormat2(AuthProfile)
+
+  implicit val createNewUserRequestFormMarshaller
+      : RootJsonFormat[CreateNewUserRequestForm] = jsonFormat3(
+    CreateNewUserRequestForm
   )
-  implicit val userEmailAddressMarshaller: RootJsonFormat[UserEmailAddress] =
-    jsonFormat1(UserEmailAddress)
-
-  implicit val userPasswordMarshaller: RootJsonFormat[UserPassword] = jsonFormat1(UserPassword)
-
-  implicit val createNewUserRequestMarshaller: RootJsonFormat[CreateNewUserRequest] = jsonFormat3(CreateNewUserRequest.apply)
 
 }

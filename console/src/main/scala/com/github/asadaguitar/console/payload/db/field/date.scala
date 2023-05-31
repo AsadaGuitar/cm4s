@@ -1,9 +1,18 @@
 package com.github.asadaguitar.console.payload.db.field
 
-import java.time.LocalDateTime
+import cats.effect.IO
+
+import java.time.{LocalDateTime, ZoneId}
 
 object date {
 
+  final val zoneId = ZoneId.of("JST")
+
   type ApplicationDatetime = LocalDateTime
 
+  object ApplicationDatetime {
+    def now: IO[ApplicationDatetime] = IO.realTimeInstant.map { instant =>
+      LocalDateTime.ofInstant(instant, zoneId)
+    }
+  }
 }
