@@ -15,7 +15,7 @@ object UserInfoValidation {
   }
 
   def validateUserEmailAddress(value: String): Validated[ValidationError, UserEmailAddress] ={
-    val pattern = "^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\\.)+[a-zA-Z]{2,}$\n".r
+    val pattern = "[\\w\\-._]+@[\\w\\-._]+\\.[A-Za-z]+".r
     Validated.cond(
       pattern.matches(value),
       UserEmailAddress(value),

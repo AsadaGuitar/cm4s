@@ -21,11 +21,11 @@ object CreateNewUserRequest {
       form: CreateNewUserRequestForm
   ): ValidatedNel[ValidationError, CreateNewUserRequest] = {
     (
-      UserInfoValidation.validateUserName(form.userName).toValidatedNel,
+      UserInfoValidation.validateUserName(form.user_name).toValidatedNel,
       UserInfoValidation
-        .validateUserEmailAddress(form.userEmailAddress)
+        .validateUserEmailAddress(form.user_email_address)
         .toValidatedNel,
-      UserInfoValidation.validateUserPassword(form.userPassword).toValidatedNel
+      UserInfoValidation.validateUserPassword(form.user_password).toValidatedNel
     )
       .mapN(CreateNewUserRequest.apply)
   }

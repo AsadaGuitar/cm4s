@@ -2,6 +2,7 @@ package com.github.asadaguitar.console.entry_point.controller
 
 import akka.http.scaladsl.server.Route
 import com.github.asadaguitar.console.entry_point.auth.AuthDirective
+import com.github.asadaguitar.console.entry_point.marshaller.DateMarshaller
 import com.typesafe.config.Config
 
 private[entry_point] abstract class ControllerBase(config: Config)

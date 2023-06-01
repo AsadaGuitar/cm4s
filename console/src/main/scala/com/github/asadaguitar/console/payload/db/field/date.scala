@@ -6,7 +6,7 @@ import java.time.{LocalDateTime, ZoneId}
 
 object date {
 
-  final val zoneId = ZoneId.of("JST")
+  final val zoneId = ZoneId.of("Asia/Tokyo")
 
   type ApplicationDatetime = LocalDateTime
 

@@ -1,0 +1,29 @@
+version: "3.4"
+x-template: &flyway-template
+  image: flyway/flyway:6.0.1
+  volumes:
+    - ./db/migration:/flyway/sql
+    - ./db/flyway:/flyway/conf
+services:
+  hpcm_mysql:
+    image: mysql:5.7.29
+    platform: linux/x86_64
+    container_name: hpcm_mysql
+    command: --general-log=true --general-log-file=/var/log/mysql/general.log
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=cm4s
+      - MYSQL_ROOT_PASSWORD=P@ssw0rd
+  flyway-clean:
+    <<: *flyway-template
+    command: clean
+  flyway-migrate:
+    <<: *flyway-template
+    command: migrate
+  flyway-info:
+    <<: *flyway-template
+    command: info
+  flyway-repair:
+    <<: *flyway-template
+    command: repair
